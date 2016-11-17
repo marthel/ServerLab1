@@ -10,23 +10,20 @@ import java.security.NoSuchAlgorithmException;
  * Created by Marthin on 2016-11-11.
  */
 public class UserManager {
-    private UserViewModel user;
     private UserDb db;
     public UserManager(){
         this.db = new UserDb();
     }
 
     public boolean login(UserViewModel user) {
-        this.user = user;
-        this.user.setPassword(digestPassword(this.user.getPassword()));
-        return db.authenticate(this.user);
+        user.setPassword(digestPassword(user.getPassword()));
+        return db.authenticate(user);
     }
 
     public void register(UserViewModel user) {
-        this.user = user;
-        this.user.setPassword(digestPassword(this.user.getPassword()));
+        user.setPassword(digestPassword(user.getPassword()));
         System.out.println(user.toString());
-        db.register(this.user);
+        db.register(user);
     }
 
     private String digestPassword(String password) {

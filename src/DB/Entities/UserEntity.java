@@ -13,6 +13,8 @@ public class UserEntity {
     private String username;
     private String password;
     private Collection<PostEntity> postsByUserId;
+    private Collection<ChatMessageEntity> sentChatMessages;
+    private Collection<ChatMessageEntity> receivedChatMessages;
 
     @Id
     @Column(name = "user_id")
@@ -73,5 +75,23 @@ public class UserEntity {
 
     public void setPostsByUserId(Collection<PostEntity> postsByUserId) {
         this.postsByUserId = postsByUserId;
+    }
+
+    @OneToMany(mappedBy = "userBySenderId")
+    public Collection<ChatMessageEntity> getSentChatMessages() {
+        return sentChatMessages;
+    }
+
+    public void setSentChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId) {
+        this.sentChatMessages = chatMessagesByUserId;
+    }
+
+    @OneToMany(mappedBy = "userByReceiverId")
+    public Collection<ChatMessageEntity> getReceivedChatMessages() {
+        return receivedChatMessages;
+    }
+
+    public void setReceivedChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId_0) {
+        this.receivedChatMessages = chatMessagesByUserId_0;
     }
 }
