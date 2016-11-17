@@ -46,8 +46,9 @@ public class UserDb {
         Predicate p1 = cb.equal(u.get("username"),this.user.getUsername());
         Predicate p2 = cb.equal(u.get("password"),this.user.getPassword());
         cq.where(cb.and(p1,p2));
-        TypedQuery<UserEntity> q = entityManager.createQuery(cq);
-        int count = q.getResultList().size();
+        //TypedQuery<UserEntity> q = entityManager.createQuery(cq);
+        //int count = q.getResultList().size();
+        int count = entityManager.createQuery(cq).getResultList().size();
         entityManager.close();
         return  count > 0;
     }
