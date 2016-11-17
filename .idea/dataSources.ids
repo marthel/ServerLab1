@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - lab1@localhost" uuid="2ab757d5-fc54-4b57-a4a9-5709fcf5e411">
+    <database-info product="MySQL" version="5.7.9-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="lab1"/>
+      <table id="2" parent="1" name="post"/>
+      <table id="3" parent="1" name="user"/>
+      <column id="4" parent="2" name="post_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="5" parent="2" name="body">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="6" parent="2" name="creation_date">
+        <data-type>date</data-type>
+      </column>
+      <column id="7" parent="2" name="user_id">
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="8" parent="2" name="user_id">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="9" parent="2" name="PRIMARY">
+        <columns>post_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="10" parent="2" name="post_ibfk_1">
+        <columns>user_id</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="11" parent="3" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="12" parent="3" name="username">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="13" parent="3" name="password">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="14" parent="3" name="username">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="15" parent="3" name="PRIMARY">
+        <columns>user_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="16" parent="3" name="username">
+        <columns>username</columns>
+        <underlying-index>username</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>

@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ServerLab1:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServerLab1_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ServerLab1" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.2.3-5.2.3" />
+          <element id="library" level="project" name="JPA 2.0-2.0" />
+          <element id="library" level="project" name="Mojarra-2.2.1" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
+          <element id="library" level="project" name="OpenFaces-3.0" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.37-bin" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ServerLab1/web/Web" />
+    </root>
+  </artifact>
+</component>

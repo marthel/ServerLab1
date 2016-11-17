@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - lab1@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="lab1">
+      <visible>1</visible>
+    </schema>
+    <table id="2" parent="1" name="post"/>
+    <table id="3" parent="1" name="user"/>
+    <column id="4" parent="2" name="post_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="5" parent="2" name="body">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="6" parent="2" name="creation_date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="7" parent="2" name="user_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="8" parent="2" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="9" parent="2" name="PRIMARY">
+      <columns>post_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="10" parent="2" name="post_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="11" parent="3" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="12" parent="3" name="username">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="13" parent="3" name="password">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <index id="14" parent="3" name="username">
+      <columns>username</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="15" parent="3" name="PRIMARY">
+      <columns>user_id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="16" parent="3" name="username">
+      <columns>username</columns>
+      <underlying-index>username</underlying-index>
+    </key>
+  </database-model>
+</dataSource>
