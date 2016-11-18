@@ -6,6 +6,8 @@ import UI.ViewModels.PostViewModel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Created by Marthin on 2016-11-11.
@@ -18,13 +20,16 @@ public class PostDb {
     public PostDb() {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
-    private void setPost(PostViewModel post){
-        this.post = new PostEntity();
-        this.post.setBody(post.getBody());
 
+    public static PostEntity convertToPostEntity(PostViewModel p){
+        PostEntity post = new PostEntity();
+        post.setBody(p.getBody());
+        post.setUserByUserId(UserDb.convertToUserEntity(p.getUser()));
+        return post;
     }
     public void addPost(PostViewModel post) {
-        setPost(post);
+        this.post = convertToPostEntity(post);
+        this.post.setCreationDate(new Date(Calendar.getInstance().getTime().getTime()));
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(this.post);

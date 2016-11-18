@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 public class PostBean {
     private PostViewModel post;
     private PostManager postManager;
-
     public PostBean() {
         this.post = new PostViewModel();
         postManager = new PostManager();
@@ -24,6 +23,7 @@ public class PostBean {
     public void setPost(PostViewModel post) {
         this.post = post;
     }
+
 
     public void createPost(){
         postManager.createPost(post);

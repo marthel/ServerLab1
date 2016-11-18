@@ -22,13 +22,15 @@ public class UserDb {
     public UserDb() {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
-    private void setUser(UserViewModel user){
-        this.user = new UserEntity();
-        this.user.setUsername(user.getUsername());
-        this.user.setPassword(user.getPassword());
+
+    public static UserEntity convertToUserEntity(UserViewModel u){
+        UserEntity user = new UserEntity();
+        user.setUsername(u.getUsername());
+        user.setPassword(u.getPassword());
+        return user;
     }
     public void register(UserViewModel user){
-        setUser(user);
+        this.user = convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(this.user);
@@ -37,7 +39,7 @@ public class UserDb {
 
     }
     public boolean authenticate(UserViewModel user){
-        setUser(user);
+        this.user = convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
