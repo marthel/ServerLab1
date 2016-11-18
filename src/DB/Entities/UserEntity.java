@@ -12,7 +12,7 @@ public class UserEntity {
     private int userId;
     private String username;
     private String password;
-    private Collection<PostEntity> postsByUserId;
+    private Collection<PostEntity> posts;
     private Collection<ChatMessageEntity> sentChatMessages;
     private Collection<ChatMessageEntity> receivedChatMessages;
 
@@ -68,13 +68,13 @@ public class UserEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<PostEntity> getPostsByUserId() {
-        return postsByUserId;
+    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
+    public Collection<PostEntity> getPosts() {
+        return posts;
     }
 
-    public void setPostsByUserId(Collection<PostEntity> postsByUserId) {
-        this.postsByUserId = postsByUserId;
+    public void setPosts(Collection<PostEntity> postsByUserId) {
+        this.posts = postsByUserId;
     }
 
     @OneToMany(mappedBy = "userBySenderId")

@@ -4,9 +4,8 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
      <h:form>
-         <h:outputLabel value="create new post"/><br/>
-         <h:inputTextarea id="body" value="#{postBean.post.body}" /><br />
-         <h:commandButton value="Post" action="#{postBean.createPost}"/>
-         <c:set value="#{userBean.user}" target="#{postBean.post}" property="user" />
+        <div align="left"><h:outputLabel value="create new post"/></div><br/>
+         <h:inputTextarea style="width: 300px;height: 100px;" id="body" value="#{postBean.post.body}" /><br />
+         <div align="right"><h:commandButton value="Post" action="#{postBean.createPost}"/></div>
      </h:form>
  </ui:composition>

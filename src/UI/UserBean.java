@@ -14,9 +14,11 @@ import javax.faces.bean.SessionScoped;
 public class UserBean {
     private UserViewModel user;
     private UserManager userManager;
+    private boolean isAuthenticated;
     public UserBean() {
         this.user = new UserViewModel();
         userManager = new UserManager();
+        isAuthenticated = false;
     }
 
     public UserViewModel getUser() {
@@ -31,9 +33,14 @@ public class UserBean {
         return "/login.xhtml";
     }
     public String login(){
-        if(userManager.login(this.user)){
+        setUser(userManager.login(this.user));
+        if(this.user!=null){
+            isAuthenticated = true;
             return "/home.xhtml";
-        }
-        return "/login.xhtml";
+        }else return "/login.xhtml";
+    }
+
+    public boolean isAuthenticated() {
+        return isAuthenticated;
     }
 }

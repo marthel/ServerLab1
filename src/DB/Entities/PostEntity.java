@@ -12,7 +12,7 @@ public class PostEntity {
     private int postId;
     private String body;
     private Date creationDate;
-    private UserEntity userByUserId;
+    private UserEntity user;
 
     @Id
     @Column(name = "post_id")
@@ -67,12 +67,12 @@ public class PostEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    public UserEntity getUserByUserId() {
-        return userByUserId;
+    @JoinColumn( name = "user_id", referencedColumnName = "user_id")
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserByUserId(UserEntity userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(UserEntity userByUserId) {
+        this.user = userByUserId;
     }
 }

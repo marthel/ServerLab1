@@ -2,6 +2,7 @@ package DB.DAL;
 
 import DB.Entities.UserEntity;
 import UI.ViewModels.UserViewModel;
+import org.omg.CORBA.UserException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +26,7 @@ public class UserDb {
 
     public static UserEntity convertToUserEntity(UserViewModel u){
         UserEntity user = new UserEntity();
+        user.setUserId(u.getUserId());
         user.setUsername(u.getUsername());
         user.setPassword(u.getPassword());
         return user;
@@ -38,7 +40,7 @@ public class UserDb {
         entityManager.close();
 
     }
-    public boolean authenticate(UserViewModel user){
+    public UserEntity authenticate(UserViewModel user){
         this.user = convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -49,8 +51,9 @@ public class UserDb {
         cq.where(cb.and(p1,p2));
         //TypedQuery<UserEntity> q = entityManager.createQuery(cq);
         //int count = q.getResultList().size();
-        int count = entityManager.createQuery(cq).getResultList().size();
+        //int count = entityManager.createQuery(cq).getResultList().size();
+        UserEntity usr = entityManager.createQuery(cq).getSingleResult();
         entityManager.close();
-        return  count > 0;
+        return  usr;
     }
 }

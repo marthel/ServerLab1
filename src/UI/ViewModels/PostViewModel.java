@@ -45,4 +45,9 @@ public class PostViewModel {
     public void setUser(UserViewModel user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return body + " " + user.getUsername() + " date: " + creationDate.toString();
+    }
 }

@@ -1,6 +1,7 @@
 package BO;
 
 import DB.DAL.UserDb;
+import DB.Entities.UserEntity;
 import UI.ViewModels.UserViewModel;
 
 import java.security.MessageDigest;
@@ -15,9 +16,17 @@ public class UserManager {
         this.db = new UserDb();
     }
 
-    public boolean login(UserViewModel user) {
+    public static UserViewModel convertToUserViewModel(UserEntity u){
+        UserViewModel user = new UserViewModel();
+        user.setUserId(u.getUserId());
+        user.setUsername(u.getUsername());
+        user.setPassword(u.getPassword());
+        return user;
+    }
+
+    public UserViewModel login(UserViewModel user) {
         user.setPassword(digestPassword(user.getPassword()));
-        return db.authenticate(user);
+        return convertToUserViewModel(db.authenticate(user));
     }
 
     public void register(UserViewModel user) {
