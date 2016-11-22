@@ -9,6 +9,8 @@
         <class>DB.Entities.UserEntity</class>
         <class>DB.Entities.PostEntity</class>
         <class>DB.Entities.ChatMessageEntity</class>
+        <class>DB.Entities.FriendEntity</class>
+        <class>DB.Entities.FriendEntityPK</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/lab1"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
@@ -17,7 +19,7 @@
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <!--<property name="hibernate.enable_lazy_load_no_trans" value="true"/>-->
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

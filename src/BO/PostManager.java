@@ -18,19 +18,14 @@ public class PostManager {
     public PostManager(){
         this.db = new PostDb();
     }
-    public static PostViewModel convertToPostViewModel(PostEntity p){
-        PostViewModel post = new PostViewModel();
-        post.setBody(p.getBody());
-        post.setUser(UserManager.convertToUserViewModel(p.getUser()));
-        post.setCreationDate(p.getCreationDate());
-        return post;
-    }
+
     public void createPost(PostViewModel post) {
         db.addPost(post);
+
     }
 
     public List<PostViewModel> getAllPosts(UserViewModel user) {
         Collection<PostEntity> ePosts = db.findAllPosts(user);
-        return ePosts.stream().map(PostManager::convertToPostViewModel).collect(Collectors.toList());
+        return ePosts.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
     }
 }

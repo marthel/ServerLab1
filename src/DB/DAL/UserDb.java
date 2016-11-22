@@ -2,8 +2,6 @@ package DB.DAL;
 
 import DB.Entities.UserEntity;
 import UI.ViewModels.UserViewModel;
-import org.omg.CORBA.UserException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import BO.Converter;
 
 /**
  * Created by Marthin on 2016-11-11.
@@ -24,15 +23,8 @@ public class UserDb {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
 
-    public static UserEntity convertToUserEntity(UserViewModel u){
-        UserEntity user = new UserEntity();
-        user.setUserId(u.getUserId());
-        user.setUsername(u.getUsername());
-        user.setPassword(u.getPassword());
-        return user;
-    }
     public void register(UserViewModel user){
-        this.user = convertToUserEntity(user);
+        this.user =  Converter.convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(this.user);
@@ -41,7 +33,7 @@ public class UserDb {
 
     }
     public UserEntity authenticate(UserViewModel user){
-        this.user = convertToUserEntity(user);
+        this.user = Converter.convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);

@@ -7,7 +7,7 @@ import java.util.Collection;
  * Created by Marthin on 2016-11-17.
  */
 @Entity
-@Table(name = "user", schema = "lab1", catalog = "")
+@Table(name = "user", schema = "lab1")
 public class UserEntity {
     private int userId;
     private String username;
@@ -15,6 +15,8 @@ public class UserEntity {
     private Collection<PostEntity> posts;
     private Collection<ChatMessageEntity> sentChatMessages;
     private Collection<ChatMessageEntity> receivedChatMessages;
+    private Collection<FriendEntity> userByUserID;
+    private Collection<FriendEntity> userByFollowID;
 
     @Id
     @Column(name = "user_id")
@@ -93,5 +95,23 @@ public class UserEntity {
 
     public void setReceivedChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId_0) {
         this.receivedChatMessages = chatMessagesByUserId_0;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<FriendEntity> getUserByUserID() {
+        return userByUserID;
+    }
+
+    public void setUserByUserID(Collection<FriendEntity> userByUserID) {
+        this.userByUserID = userByUserID;
+    }
+
+    @OneToMany(mappedBy = "userByFollowId")
+    public Collection<FriendEntity> getUserByFollowID() {
+        return userByFollowID;
+    }
+
+    public void setUserByFollowID(Collection<FriendEntity> userByFollowID) {
+        this.userByFollowID = userByFollowID;
     }
 }

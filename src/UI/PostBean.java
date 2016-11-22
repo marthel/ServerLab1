@@ -16,7 +16,7 @@ import java.util.List;
  */
 @ManagedBean
 public class PostBean implements Serializable {
-    private PostViewModel post;
+    private PostViewModel newPost;
     private List<PostViewModel> posts;
     private PostManager postManager;
     @ManagedProperty(value="#{userBean.user}")
@@ -31,7 +31,7 @@ public class PostBean implements Serializable {
     }
 
     public PostBean() {
-        this.post = new PostViewModel();
+        this.newPost = new PostViewModel();
         postManager = new PostManager();
         posts = new ArrayList<>();
     }
@@ -40,17 +40,17 @@ public class PostBean implements Serializable {
         posts = postManager.getAllPosts(this.user);
     }
     public PostViewModel getPost() {
-        return post;
+        return newPost;
     }
 
     public void setPost(PostViewModel post) {
-        this.post = post;
+        this.newPost = post;
     }
 
 
     public void createPost(){
-        this.post.setUser(this.user);
-        postManager.createPost(post);
+        this.newPost.setUser(this.user);
+        postManager.createPost(newPost);
     }
 
    public List<PostViewModel> getPosts(){

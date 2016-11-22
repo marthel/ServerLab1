@@ -16,17 +16,9 @@ public class UserManager {
         this.db = new UserDb();
     }
 
-    public static UserViewModel convertToUserViewModel(UserEntity u){
-        UserViewModel user = new UserViewModel();
-        user.setUserId(u.getUserId());
-        user.setUsername(u.getUsername());
-        user.setPassword(u.getPassword());
-        return user;
-    }
-
     public UserViewModel login(UserViewModel user) {
         user.setPassword(digestPassword(user.getPassword()));
-        return convertToUserViewModel(db.authenticate(user));
+        return Converter.convertToUserViewModel(db.authenticate(user));
     }
 
     public void register(UserViewModel user) {
