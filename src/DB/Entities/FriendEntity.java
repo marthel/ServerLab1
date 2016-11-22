@@ -1,37 +1,35 @@
 package DB.Entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by waleedhassan on 22/11/16.
  */
 @Entity
 @Table(name = "friend", schema = "lab1")
-@IdClass(FriendEntityPK.class)
-public class FriendEntity {
-    private int userId;
-    private int followId;
+public class FriendEntity implements Serializable {
     private UserEntity userByUserId;
     private UserEntity userByFollowId;
 
     @Id
     @Column(name = "user_id")
     public int getUserId() {
-        return userId;
+        return userByUserId.getUserId();
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.userByUserId.setUserId(userId);
     }
 
     @Id
     @Column(name = "follow_id")
     public int getFollowId() {
-        return followId;
+        return this.userByFollowId.getUserId();
     }
 
     public void setFollowId(int followId) {
-        this.followId = followId;
+        this.userByFollowId.setUserId(followId);
     }
 
     @Override
@@ -41,16 +39,16 @@ public class FriendEntity {
 
         FriendEntity that = (FriendEntity) o;
 
-        if (userId != that.userId) return false;
-        if (followId != that.followId) return false;
+        if (userByUserId.getUserId() != that.userByUserId.getUserId()) return false;
+        if (userByFollowId.getUserId() != that.userByFollowId.getUserId()) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = userId;
-        result = 31 * result + followId;
+        int result = userByUserId.getUserId();
+        result = 31 * result + userByFollowId.getUserId();
         return result;
     }
 
@@ -69,7 +67,6 @@ public class FriendEntity {
     public UserEntity getUserByFollowId() {
         return userByFollowId;
     }
-
     public void setUserByFollowId(UserEntity userByFollowId) {
         this.userByFollowId = userByFollowId;
     }
