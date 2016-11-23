@@ -6,6 +6,9 @@ import UI.ViewModels.UserViewModel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Marthin on 2016-11-11.
@@ -38,4 +41,13 @@ public class UserManager {
         return new String(messageDigest.digest());
     }
 
+    public List<UserViewModel> getAllUsers(UserViewModel user, String searchTerm) {
+        Collection<UserEntity> userEntities;
+        if(searchTerm.length()<1) {
+            userEntities = db.findAllUsers(user);
+        } else {
+            userEntities = db.findUsersByName(user, searchTerm);
+        }
+        return userEntities.stream().map(Converter::convertToUserViewModel).collect(Collectors.toList());
+    }
 }

@@ -17,6 +17,10 @@ public class UserViewModel {
 
     public UserViewModel() {
     }
+    public UserViewModel(String username, String password) {
+        this.username = username;
+        this.password=password;
+    }
 
     public int getUserId() {
         return userId;

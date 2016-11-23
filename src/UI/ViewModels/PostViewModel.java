@@ -12,6 +12,7 @@ public class PostViewModel {
     private UserViewModel user;
 
     public PostViewModel() {
+        body = "";
     }
 
     public int getPostId() {

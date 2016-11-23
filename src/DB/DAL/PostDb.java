@@ -7,6 +7,10 @@ import UI.ViewModels.UserViewModel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Collection;
@@ -39,9 +43,8 @@ public class PostDb {
         entityManager.close();
     }
     public Collection<PostEntity> findAllPosts(UserViewModel usr) {
-        Collection<PostEntity> posts = findYourPosts(usr);
         //add follow posts
-        return posts;
+        return null;
     }
     public Collection<PostEntity> findYourPosts(UserViewModel usr) {
         entityManager = entityManagerFactory.createEntityManager();

@@ -9,6 +9,7 @@ import UI.ViewModels.UserViewModel;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * Created by waleedhassan on 22/11/16.
  */
 @ManagedBean
+@SessionScoped
 public class FriendBean implements Serializable{
 
 

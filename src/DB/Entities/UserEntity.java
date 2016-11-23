@@ -70,7 +70,7 @@ public class UserEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     public Collection<PostEntity> getPosts() {
         return posts;
     }

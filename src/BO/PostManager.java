@@ -25,7 +25,12 @@ public class PostManager {
     }
 
     public List<PostViewModel> getAllPosts(UserViewModel user) {
-        Collection<PostEntity> ePosts = db.findAllPosts(user);
-        return ePosts.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
+        Collection<PostEntity> postEntities = db.findAllPosts(user);
+        return postEntities.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
+    }
+
+    public List<PostViewModel> getYourPosts(UserViewModel user) {
+        Collection<PostEntity> postEntities = db.findYourPosts(user);
+        return postEntities.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
     }
 }

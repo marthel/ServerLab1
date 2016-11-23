@@ -3,9 +3,13 @@
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
-     <h:form>
-        <div align="left"><h:outputLabel value="create new post"/></div><br/>
-         <h:inputTextarea style="width: 300px;height: 100px;" id="body" value="#{postBean.post.body}" /><br />
-         <div align="right"><h:commandButton value="Post" action="#{postBean.createPost}"/></div>
-     </h:form>
+        <h:form rendered="#{userBean.authenticated}">
+            <h:outputLabel value="create new post"/><br/><br/>
+            <h:inputTextarea style="width: 79%;height: 120px; margin: auto; display: block;" id="body" value="#{postBean.post.body}">
+                <f:ajax event="keyup" render="length"/>
+            </h:inputTextarea>
+            <br />
+            <h:outputLabel style="position:relative;left: 13%" id="length" value="#{postBean.charsLeft}"/>
+            <h:commandButton style="position:relative;left: 57%" value="Post" action="#{postBean.createPost}"/>
+         </h:form>
  </ui:composition>

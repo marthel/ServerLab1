@@ -4,19 +4,35 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
+
 <h:head>
     <title>HOME</title>
+    <link type="text/css" rel="stylesheet"
+          href="/grid.css" />
 </h:head>
 <h:body>
     <c:if test="#{!userBean.authenticated}">
-       <h1>fix authentication</h1>
+        <h1>inte inloggad</h1>
     </c:if>
-    <div style="width: 310px; margin: auto; padding: 20px;">
-        <h:outputLabel value="Welcome #{userBean.user.username}"/><br/><br/>
-        <ui:include src="/createPost.xhtml"/>
-    </div>
-    <div align="center">
-        <ui:include src="/posts.xhtml"/>
-    </div>
+    <c:if test="#{userBean.authenticated}">
+        <div class="section group">
+            <div class="col span_1">
+                <h:outputLabel value="Welcome #{userBean.user.username}"/><br/><br/>
+                <ui:include src="/users.xhtml"/>
+
+                chat
+            </div>
+            <div class="col span_2">
+                <ui:include src="/createPost.xhtml"/>
+                <br/><br/>
+                <hr/>
+                <br/><br/>
+                <ui:include src="/yourPosts.xhtml"/>
+            </div>
+            <div class="col span_1">
+                friends posts
+            </div>
+        </div>
+    </c:if>
 </h:body>
 </html>
