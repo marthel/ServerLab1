@@ -42,12 +42,7 @@ public class UserManager {
     }
 
     public List<UserViewModel> getAllUsers(UserViewModel user, String searchTerm) {
-        Collection<UserEntity> userEntities;
-        if(searchTerm.length()<1) {
-            userEntities = db.findAllUsers(user);
-        } else {
-            userEntities = db.findUsersByName(user, searchTerm);
-        }
+        Collection<UserEntity> userEntities = db.findUsersByName(user, searchTerm);
         return userEntities.stream().map(Converter::convertToUserViewModel).collect(Collectors.toList());
     }
 }

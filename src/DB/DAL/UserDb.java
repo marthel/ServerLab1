@@ -49,21 +49,6 @@ public class UserDb {
         return  usr;
     }
 
-    public Collection<UserEntity> findAllUsers(UserViewModel user) {
-        this.user = Converter.convertToUserEntity(user);
-        entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-        Root<UserEntity> u = cq.from(UserEntity.class);
-
-        Predicate p1 = cb.notEqual(u.get("username"),this.user.getUsername());
-        cq.where(p1);
-        Collection<UserEntity> users = entityManager.createQuery(cq).getResultList();
-        entityManager.close();
-
-        return  users;
-    }
-
     public Collection<UserEntity> findUsersByName(UserViewModel user, String name) {
         this.user = Converter.convertToUserEntity(user);
         entityManager = entityManagerFactory.createEntityManager();
