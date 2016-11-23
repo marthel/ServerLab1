@@ -20,14 +20,14 @@ public class followDb {
     public followDb() {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
-    public Collection<FollowEntity> findYourFollowers(UserViewModel usr) {
+    public Collection<FollowEntity> findYourFollows(UserViewModel usr) {
         entityManager = entityManagerFactory.createEntityManager();
         UserEntity user = entityManager.find(UserEntity.class,usr.getUserId());
-        Collection<FollowEntity> followers = user.getFollowers();
+        Collection<FollowEntity> follows = user.getFollow();
         entityManager.close();
-        return followers;
+        System.out.println(follows.size());
+        return follows;
     }
-
     public void addFollower(FollowViewModel follow) {
         this.follow = Converter.convertToFollowEntity(follow);
         entityManager = entityManagerFactory.createEntityManager();

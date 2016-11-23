@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +25,6 @@ public class FollowBean implements Serializable{
     public UserViewModel getUser() {
         return user;
     }
-
     public void setUser(UserViewModel user) {
         this.user = user;
     }
@@ -43,13 +43,12 @@ public class FollowBean implements Serializable{
 
     public void addFriend(UserViewModel user){
         this.follow.setFollower(this.user);
-        this.follow.setFollowee(user);
-        //System.out.println(user.getUsername() +" " + user.getUserId());
+        this.follow.setFollowing(user);
         followManager.addFriend(follow);
     }
 
-    public List<FollowViewModel> getYourFriends(){
-        return followManager.getYourFriends(this.user);
+    public List<FollowViewModel> getYourFollows(){
+        return followManager.getYourFollows(this.user);
     }
 
 

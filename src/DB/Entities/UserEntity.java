@@ -3,18 +3,15 @@ package DB.Entities;
 import javax.persistence.*;
 import java.util.Collection;
 
-
 @Entity
 @Table(name = "user", schema = "lab1")
 public class UserEntity {
     private int userId;
     private String username;
     private String password;
-    private Collection<ChatMessageEntity> chatMessagesSent;
-    private Collection<ChatMessageEntity> chatMessagesReceived;
+    private Collection<ChatMessageEntity> chatMessages;
     private Collection<PostEntity> posts;
-    private Collection<FollowEntity> followers;
-    private Collection<FollowEntity> followees;
+    private Collection<FollowEntity> follow;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -69,21 +66,12 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "sender")
-    public Collection<ChatMessageEntity> getChatMessagesSent() {
-        return chatMessagesSent;
+    public Collection<ChatMessageEntity> getChatMessages() {
+        return chatMessages;
     }
 
-    public void setChatMessagesSent(Collection<ChatMessageEntity> chatMessagesByUserId) {
-        this.chatMessagesSent = chatMessagesByUserId;
-    }
-
-    @OneToMany(mappedBy = "receiver")
-    public Collection<ChatMessageEntity> getChatMessagesReceived() {
-        return chatMessagesReceived;
-    }
-
-    public void setChatMessagesReceived(Collection<ChatMessageEntity> chatMessagesByUserId_0) {
-        this.chatMessagesReceived = chatMessagesByUserId_0;
+    public void setChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId) {
+        this.chatMessages = chatMessagesByUserId;
     }
 
     @OneToMany(mappedBy = "user")
@@ -96,20 +84,12 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "follower")
-    public Collection<FollowEntity> getFollowers() {
-        return followers;
+    public Collection<FollowEntity> getFollow() {
+        return follow;
     }
 
-    public void setFollowers(Collection<FollowEntity> followsByUserId) {
-        this.followers = followsByUserId;
+    public void setFollow(Collection<FollowEntity> followsByUserId) {
+        this.follow = followsByUserId;
     }
 
-    @OneToMany(mappedBy = "followee")
-    public Collection<FollowEntity> getFollowees() {
-        return followees;
-    }
-
-    public void setFollowees(Collection<FollowEntity> followsByUserId_0) {
-        this.followees = followsByUserId_0;
-    }
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import BO.PostManager;
+import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
 
@@ -12,22 +13,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Marthin on 2016-11-11.
- */
+
 @ManagedBean
 @SessionScoped
 public class PostBean implements Serializable {
     private PostViewModel post;
     private PostManager postManager;
+
     @ManagedProperty(value="#{userBean.user}")
     private UserViewModel user;
     public UserViewModel getUser() {
         return user;
     }
-
     public void setUser(UserViewModel user) {
         this.user = user;
+    }
+
+    @ManagedProperty(value="#{followBean.yourFollows}")
+    private List<FollowViewModel> follows;
+    public List<FollowViewModel> getFollows() {
+        return follows;
+    }
+    public void setFollows(List<FollowViewModel> follows) {
+      this.follows=follows;
     }
 
     public PostBean() {
@@ -51,11 +59,13 @@ public class PostBean implements Serializable {
    public List<PostViewModel> getYourPosts(){
         return postManager.getYourPosts(this.user);
     }
+    public List<PostViewModel> getFollowingPosts(){
+        return postManager.getFollowingPosts(follows);
+    }
     public String getCharsLeft(){
         int charsLeft = 255 - post.getBody().length();
-        StringBuilder sb = new StringBuilder();
-        sb.append("characters left: ");
-        sb.append( charsLeft > 0 ? charsLeft : 0);
-        return sb.toString();
+        String strCharsLeft = "characters left: " +
+                (charsLeft > 0 ? charsLeft : 0);
+        return strCharsLeft;
     }
 }

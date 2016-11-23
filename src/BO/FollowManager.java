@@ -22,8 +22,8 @@ public class FollowManager {
         db.addFollower(follow);
     }
 
-    public List<FollowViewModel> getYourFriends(UserViewModel user) {
-        Collection<FollowEntity> friends = db.findYourFollowers(user);
-        return friends.stream().map(Converter::convertToFollowViewModel).collect(Collectors.toList());
+    public List<FollowViewModel> getYourFollows(UserViewModel user) {
+        Collection<FollowEntity> follows = db.findYourFollows(user);
+        return follows.stream().map(Converter::convertToFollowViewModel).collect(Collectors.toList());
     }
 }

@@ -2,9 +2,11 @@ package BO;
 
 import DB.DAL.PostDb;
 import DB.Entities.PostEntity;
+import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,13 +23,16 @@ public class PostManager {
 
     }
 
-    public List<PostViewModel> getAllPosts(UserViewModel user) {
-        Collection<PostEntity> postEntities = db.findAllPosts(user);
+    public List<PostViewModel> getFollowingPosts(List<FollowViewModel> follows) {
+        Collection<PostEntity> postEntities = new ArrayList<>();
+        for (FollowViewModel f:follows) {
+            postEntities.addAll(db.findPostsByUser(f.getFollowing()));
+        }
         return postEntities.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
     }
 
     public List<PostViewModel> getYourPosts(UserViewModel user) {
-        Collection<PostEntity> postEntities = db.findYourPosts(user);
+        Collection<PostEntity> postEntities = db.findPostsByUser(user);
         return postEntities.stream().map(Converter::convertToPostViewModel).collect(Collectors.toList());
     }
 }

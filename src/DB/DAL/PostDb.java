@@ -25,21 +25,13 @@ public class PostDb {
     public void addPost(PostViewModel post) {
         this.post = Converter.convertToPostEntity(post);
         this.post.setCreationDate(new Date(Calendar.getInstance().getTime().getTime()));
-
-        System.out.println("creator: " + this.post.getUser().getUsername() + " post: " + this.post.getBody() + " creation date: " + this.post.getCreationDate());
-        System.out.println("\n id:" + this.post.getUser().getUserId());
-
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(this.post);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
-    public Collection<PostEntity> findAllPosts(UserViewModel usr) {
-        //add follow posts
-        return null;
-    }
-    public Collection<PostEntity> findYourPosts(UserViewModel usr) {
+    public Collection<PostEntity> findPostsByUser(UserViewModel usr) {
         entityManager = entityManagerFactory.createEntityManager();
         UserEntity user = entityManager.find(UserEntity.class,usr.getUserId());
         Collection<PostEntity> posts = user.getPosts();

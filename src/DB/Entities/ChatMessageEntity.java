@@ -3,7 +3,6 @@ package DB.Entities;
 import javax.persistence.*;
 import java.sql.Date;
 
-
 @Entity
 @Table(name = "chat_message", schema = "lab1")
 public class ChatMessageEntity {

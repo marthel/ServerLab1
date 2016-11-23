@@ -2,13 +2,12 @@ package DB.Entities;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "follow", schema = "lab1")
 public class FollowEntity {
     private int followId;
     private UserEntity follower;
-    private UserEntity followee;
+    private UserEntity following;
 
     @Id
     @Column(name = "follow_id", nullable = false)
@@ -48,12 +47,12 @@ public class FollowEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "followee_id", referencedColumnName = "user_id")
-    public UserEntity getFollowee() {
-        return followee;
+    @JoinColumn(name = "following_id", referencedColumnName = "user_id")
+    public UserEntity getFollowing() {
+        return following;
     }
 
-    public void setFollowee(UserEntity userByFolloweeId) {
-        this.followee = userByFolloweeId;
+    public void setFollowing(UserEntity userByFollowingId) {
+        this.following = userByFollowingId;
     }
 }

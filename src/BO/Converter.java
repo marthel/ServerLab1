@@ -12,16 +12,16 @@ public class Converter {
 
 
     public static FollowViewModel convertToFollowViewModel(FollowEntity f){
-        FollowViewModel friend = new FollowViewModel();
-        friend.setFollower(convertToUserViewModel(f.getFollower()));
-        friend.setFollowee(convertToUserViewModel(f.getFollowee()));
-        return friend;
+        FollowViewModel follow = new FollowViewModel();
+        follow.setFollower(convertToUserViewModel(f.getFollower()));
+        follow.setFollowing(convertToUserViewModel(f.getFollowing()));
+        return follow;
     }
     public static FollowEntity convertToFollowEntity(FollowViewModel f){
-        FollowEntity friend = new FollowEntity();
-        friend.setFollower(convertToUserEntity(f.getFollower()));
-        friend.setFollowee(convertToUserEntity(f.getFollowee()));
-        return friend;
+        FollowEntity follow = new FollowEntity();
+        follow.setFollower(convertToUserEntity(f.getFollower()));
+        follow.setFollowing(convertToUserEntity(f.getFollowing()));
+        return follow;
     }
 
     public static PostViewModel convertToPostViewModel(PostEntity p){

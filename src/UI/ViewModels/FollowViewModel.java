@@ -3,7 +3,7 @@ package UI.ViewModels;
 public class FollowViewModel {
 
     private UserViewModel follower;
-    private UserViewModel followee;
+    private UserViewModel following;
 
     public UserViewModel getFollower() {
         return follower;
@@ -13,11 +13,11 @@ public class FollowViewModel {
         this.follower = follower;
     }
 
-    public UserViewModel getFollowee() {
-        return followee;
+    public UserViewModel getFollowing() {
+        return following;
     }
 
-    public void setFollowee(UserViewModel followee) {
-        this.followee = followee;
+    public void setFollowing(UserViewModel following) {
+        this.following = following;
     }
 }
