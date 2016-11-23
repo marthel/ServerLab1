@@ -3,20 +3,18 @@ package DB.Entities;
 import javax.persistence.*;
 import java.sql.Date;
 
-/**
- * Created by Marthin on 2016-11-17.
- */
+
 @Entity
-@Table(name = "chat_message", schema = "lab1", catalog = "")
+@Table(name = "chat_message", schema = "lab1")
 public class ChatMessageEntity {
     private int chatMessageId;
     private String message;
     private Date sendDate;
-    private UserEntity userBySenderId;
-    private UserEntity userByReceiverId;
+    private UserEntity sender;
+    private UserEntity receiver;
 
     @Id
-    @Column(name = "chat_message_id")
+    @Column(name = "chat_message_id", nullable = false)
     public int getChatMessageId() {
         return chatMessageId;
     }
@@ -69,21 +67,21 @@ public class ChatMessageEntity {
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "user_id")
-    public UserEntity getUserBySenderId() {
-        return userBySenderId;
+    public UserEntity getSender() {
+        return sender;
     }
 
-    public void setUserBySenderId(UserEntity userBySenderId) {
-        this.userBySenderId = userBySenderId;
+    public void setSender(UserEntity userBySenderId) {
+        this.sender = userBySenderId;
     }
 
     @ManyToOne
     @JoinColumn(name = "receiver_id", referencedColumnName = "user_id")
-    public UserEntity getUserByReceiverId() {
-        return userByReceiverId;
+    public UserEntity getReceiver() {
+        return receiver;
     }
 
-    public void setUserByReceiverId(UserEntity userByReceiverId) {
-        this.userByReceiverId = userByReceiverId;
+    public void setReceiver(UserEntity userByReceiverId) {
+        this.receiver = userByReceiverId;
     }
 }

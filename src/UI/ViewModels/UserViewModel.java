@@ -4,17 +4,10 @@ package UI.ViewModels;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Marthin on 2016-11-11.
- */
 public class UserViewModel {
     private int userId;
     private String username;
     private String password;
-    private Collection<PostViewModel> posts;
-    private Collection<ChatMessageViewModel> sentChatMessages;
-    private Collection<ChatMessageViewModel> receivedChatMessages;
-
     public UserViewModel() {
     }
     public UserViewModel(String username, String password) {
@@ -44,30 +37,6 @@ public class UserViewModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Collection<PostViewModel> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Collection<PostViewModel> posts) {
-        this.posts = posts;
-    }
-
-    public Collection<ChatMessageViewModel> getSentChatMessages() {
-        return sentChatMessages;
-    }
-
-    public void setSentChatMessages(Collection<ChatMessageViewModel> sentChatMessages) {
-        this.sentChatMessages = sentChatMessages;
-    }
-
-    public Collection<ChatMessageViewModel> getReceivedChatMessages() {
-        return receivedChatMessages;
-    }
-
-    public void setReceivedChatMessages(Collection<ChatMessageViewModel> receivedChatMessages) {
-        this.receivedChatMessages = receivedChatMessages;
     }
 
     @Override

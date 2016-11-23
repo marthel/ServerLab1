@@ -3,11 +3,8 @@ package DB.Entities;
 import javax.persistence.*;
 import java.sql.Date;
 
-/**
- * Created by waleedhassan on 17/11/16.
- */
 @Entity
-@Table(name = "post", schema = "lab1", catalog = "")
+@Table(name = "post", schema = "lab1")
 public class PostEntity {
     private int postId;
     private String body;
@@ -15,7 +12,7 @@ public class PostEntity {
     private UserEntity user;
 
     @Id
-    @Column(name = "post_id")
+    @Column(name = "post_id", nullable = false)
     public int getPostId() {
         return postId;
     }
@@ -67,7 +64,7 @@ public class PostEntity {
     }
 
     @ManyToOne
-    @JoinColumn( name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     public UserEntity getUser() {
         return user;
     }

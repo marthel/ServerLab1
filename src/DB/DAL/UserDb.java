@@ -10,13 +10,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import BO.Converter;
-import org.hibernate.criterion.MatchMode;
 
 import java.util.Collection;
 
-/**
- * Created by Marthin on 2016-11-11.
- */
+
 public class UserDb {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;

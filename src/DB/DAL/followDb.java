@@ -1,40 +1,38 @@
 package DB.DAL;
 
 import BO.Converter;
-import DB.Entities.FriendEntity;
+import DB.Entities.FollowEntity;
 import DB.Entities.UserEntity;
-import UI.ViewModels.FriendViewModel;
+import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.UserViewModel;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Collection;
-/**
- * Created by waleedhassan on 22/11/16.
- */
-public class FriendDB {
+
+public class followDb {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-    private FriendEntity friend;
+    private FollowEntity follow;
 
-    public FriendDB() {
+    public followDb() {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
-    public Collection<FriendEntity> findYourFriends(UserViewModel usr) {
+    public Collection<FollowEntity> findYourFollowers(UserViewModel usr) {
         entityManager = entityManagerFactory.createEntityManager();
         UserEntity user = entityManager.find(UserEntity.class,usr.getUserId());
-        Collection<FriendEntity> friends = user.getUserByFollowID();
+        Collection<FollowEntity> followers = user.getFollowers();
         entityManager.close();
-        return friends;
+        return followers;
     }
 
-    public void addFriend(FriendViewModel newFriend) {
-        this.friend = Converter.convertToFriendEntity(newFriend);
+    public void addFollower(FollowViewModel follow) {
+        this.follow = Converter.convertToFollowEntity(follow);
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.persist(this.friend);
+        entityManager.persist(this.follow);
         entityManager.getTransaction().commit();
         entityManager.close();
     }

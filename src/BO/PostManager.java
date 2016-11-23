@@ -5,14 +5,11 @@ import DB.Entities.PostEntity;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Marthin on 2016-11-11.
- */
+
 public class PostManager {
     private PostDb db;
     public PostManager(){

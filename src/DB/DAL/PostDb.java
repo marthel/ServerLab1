@@ -7,19 +7,12 @@ import UI.ViewModels.UserViewModel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Collection;
 import BO.Converter;
 
 
-/**
- * Created by Marthin on 2016-11-11.
- */
 public class PostDb {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;

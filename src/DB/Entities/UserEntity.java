@@ -3,23 +3,21 @@ package DB.Entities;
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
- * Created by Marthin on 2016-11-17.
- */
+
 @Entity
 @Table(name = "user", schema = "lab1")
 public class UserEntity {
     private int userId;
     private String username;
     private String password;
+    private Collection<ChatMessageEntity> chatMessagesSent;
+    private Collection<ChatMessageEntity> chatMessagesReceived;
     private Collection<PostEntity> posts;
-    private Collection<ChatMessageEntity> sentChatMessages;
-    private Collection<ChatMessageEntity> receivedChatMessages;
-    private Collection<FriendEntity> userByUserID;
-    private Collection<FriendEntity> userByFollowID;
+    private Collection<FollowEntity> followers;
+    private Collection<FollowEntity> followees;
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -70,6 +68,24 @@ public class UserEntity {
         return result;
     }
 
+    @OneToMany(mappedBy = "sender")
+    public Collection<ChatMessageEntity> getChatMessagesSent() {
+        return chatMessagesSent;
+    }
+
+    public void setChatMessagesSent(Collection<ChatMessageEntity> chatMessagesByUserId) {
+        this.chatMessagesSent = chatMessagesByUserId;
+    }
+
+    @OneToMany(mappedBy = "receiver")
+    public Collection<ChatMessageEntity> getChatMessagesReceived() {
+        return chatMessagesReceived;
+    }
+
+    public void setChatMessagesReceived(Collection<ChatMessageEntity> chatMessagesByUserId_0) {
+        this.chatMessagesReceived = chatMessagesByUserId_0;
+    }
+
     @OneToMany(mappedBy = "user")
     public Collection<PostEntity> getPosts() {
         return posts;
@@ -79,39 +95,21 @@ public class UserEntity {
         this.posts = postsByUserId;
     }
 
-    @OneToMany(mappedBy = "userBySenderId")
-    public Collection<ChatMessageEntity> getSentChatMessages() {
-        return sentChatMessages;
+    @OneToMany(mappedBy = "follower")
+    public Collection<FollowEntity> getFollowers() {
+        return followers;
     }
 
-    public void setSentChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId) {
-        this.sentChatMessages = chatMessagesByUserId;
+    public void setFollowers(Collection<FollowEntity> followsByUserId) {
+        this.followers = followsByUserId;
     }
 
-    @OneToMany(mappedBy = "userByReceiverId")
-    public Collection<ChatMessageEntity> getReceivedChatMessages() {
-        return receivedChatMessages;
+    @OneToMany(mappedBy = "followee")
+    public Collection<FollowEntity> getFollowees() {
+        return followees;
     }
 
-    public void setReceivedChatMessages(Collection<ChatMessageEntity> chatMessagesByUserId_0) {
-        this.receivedChatMessages = chatMessagesByUserId_0;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<FriendEntity> getUserByUserID() {
-        return userByUserID;
-    }
-
-    public void setUserByUserID(Collection<FriendEntity> userByUserID) {
-        this.userByUserID = userByUserID;
-    }
-
-    @OneToMany(mappedBy = "userByFollowId")
-    public Collection<FriendEntity> getUserByFollowID() {
-        return userByFollowID;
-    }
-
-    public void setUserByFollowID(Collection<FriendEntity> userByFollowID) {
-        this.userByFollowID = userByFollowID;
+    public void setFollowees(Collection<FollowEntity> followsByUserId_0) {
+        this.followees = followsByUserId_0;
     }
 }

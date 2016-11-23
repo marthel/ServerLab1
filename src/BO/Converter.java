@@ -1,28 +1,26 @@
 package BO;
 
-import DB.Entities.FriendEntity;
+import DB.Entities.FollowEntity;
 import DB.Entities.PostEntity;
 import DB.Entities.UserEntity;
-import UI.ViewModels.FriendViewModel;
+import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
 
-/**
- * Created by waleedhassan on 22/11/16.
- */
+
 public class Converter {
 
 
-    public static FriendViewModel convertToFriendViewModel(FriendEntity f){
-        FriendViewModel friend = new FriendViewModel();
-        friend.setUser(convertToUserViewModel(f.getUserByUserId()));
-        friend.setNewFriend(convertToUserViewModel(f.getUserByFollowId()));
+    public static FollowViewModel convertToFollowViewModel(FollowEntity f){
+        FollowViewModel friend = new FollowViewModel();
+        friend.setFollower(convertToUserViewModel(f.getFollower()));
+        friend.setFollowee(convertToUserViewModel(f.getFollowee()));
         return friend;
     }
-    public static FriendEntity convertToFriendEntity(FriendViewModel f){
-        FriendEntity friend = new FriendEntity();
-        friend.setUserByUserId(convertToUserEntity(f.getUser()));
-        friend.setUserByFollowId(convertToUserEntity(f.getNewFriend()));
+    public static FollowEntity convertToFollowEntity(FollowViewModel f){
+        FollowEntity friend = new FollowEntity();
+        friend.setFollower(convertToUserEntity(f.getFollower()));
+        friend.setFollowee(convertToUserEntity(f.getFollowee()));
         return friend;
     }
 
