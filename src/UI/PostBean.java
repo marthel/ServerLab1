@@ -5,12 +5,10 @@ import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,7 +27,7 @@ public class PostBean implements Serializable {
         this.user = user;
     }
 
-    @ManagedProperty(value="#{followBean.yourFollows}")
+    @ManagedProperty(value="#{followBean.follows}")
     private List<FollowViewModel> follows;
     public List<FollowViewModel> getFollows() {
         return follows;
@@ -64,8 +62,7 @@ public class PostBean implements Serializable {
     }
     public String getCharsLeft(){
         int charsLeft = 255 - post.getBody().length();
-        String strCharsLeft = "characters left: " +
+        return "characters left: " +
                 (charsLeft > 0 ? charsLeft : 0);
-        return strCharsLeft;
     }
 }

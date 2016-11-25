@@ -2,9 +2,6 @@ package UI.ViewModels;
 
 import java.sql.Date;
 
-/**
- * Created by Marthin on 2016-11-17.
- */
 public class ChatMessageViewModel {
     private int chatMessageId;
     private String message;
@@ -54,4 +51,5 @@ public class ChatMessageViewModel {
     public void setReceiver(UserViewModel receiver) {
         this.receiver = receiver;
     }
+
 }

@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +18,7 @@ public class FollowBean implements Serializable{
 
     private FollowViewModel follow;
     private FollowManager followManager;
+    private String searchTerm;
     @ManagedProperty(value="#{userBean.user}")
     private UserViewModel user;
 
@@ -28,10 +28,18 @@ public class FollowBean implements Serializable{
     public void setUser(UserViewModel user) {
         this.user = user;
     }
+    public String getSearchTerm() {
+        return searchTerm;
+    }
+
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
 
     public FollowBean() {
         this.follow = new FollowViewModel();
         followManager = new FollowManager();
+        searchTerm = "";
     }
     public FollowViewModel getFollow() {
         return follow;
@@ -47,8 +55,8 @@ public class FollowBean implements Serializable{
         followManager.addFriend(follow);
     }
 
-    public List<FollowViewModel> getYourFollows(){
-        return followManager.getYourFollows(this.user);
+    public List<FollowViewModel> getFollows(){
+        return followManager.getYourFollows(this.user, searchTerm);
     }
 
 

@@ -1,8 +1,10 @@
 package BO;
 
+import DB.Entities.ChatMessageEntity;
 import DB.Entities.FollowEntity;
 import DB.Entities.PostEntity;
 import DB.Entities.UserEntity;
+import UI.ViewModels.ChatMessageViewModel;
 import UI.ViewModels.FollowViewModel;
 import UI.ViewModels.PostViewModel;
 import UI.ViewModels.UserViewModel;
@@ -11,7 +13,7 @@ import UI.ViewModels.UserViewModel;
 public class Converter {
 
 
-    public static FollowViewModel convertToFollowViewModel(FollowEntity f){
+    static FollowViewModel convertToFollowViewModel(FollowEntity f){
         FollowViewModel follow = new FollowViewModel();
         follow.setFollower(convertToUserViewModel(f.getFollower()));
         follow.setFollowing(convertToUserViewModel(f.getFollowing()));
@@ -24,7 +26,25 @@ public class Converter {
         return follow;
     }
 
-    public static PostViewModel convertToPostViewModel(PostEntity p){
+    static ChatMessageViewModel convertToChatMessageViewModel(ChatMessageEntity c){
+        ChatMessageViewModel chat = new ChatMessageViewModel();
+        chat.setMessage(c.getMessage());
+        chat.setSender(convertToUserViewModel(c.getSender()));
+        chat.setReceiver(convertToUserViewModel(c.getReceiver()));
+        chat.setSendDate(c.getSendDate());
+        return chat;
+    }
+
+    public static ChatMessageEntity convertToChatMessageEntity(ChatMessageViewModel c){
+        ChatMessageEntity chat = new ChatMessageEntity();
+        chat.setMessage(c.getMessage());
+        chat.setSender(convertToUserEntity(c.getSender()));
+        chat.setReceiver(convertToUserEntity(c.getReceiver()));
+        chat.setSendDate(c.getSendDate());
+        return chat;
+    }
+
+    static PostViewModel convertToPostViewModel(PostEntity p){
         PostViewModel post = new PostViewModel();
         post.setBody(p.getBody());
         post.setUser(convertToUserViewModel(p.getUser()));
@@ -39,7 +59,7 @@ public class Converter {
         return post;
     }
 
-    public static UserViewModel convertToUserViewModel(UserEntity u){
+    static UserViewModel convertToUserViewModel(UserEntity u){
         UserViewModel user = new UserViewModel();
         user.setUserId(u.getUserId());
         user.setUsername(u.getUsername());

@@ -11,21 +11,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Collection;
 
-public class followDb {
+public class FollowDb {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
     private FollowEntity follow;
 
-    public followDb() {
+    public FollowDb() {
         entityManagerFactory = Persistence.createEntityManagerFactory("test");
     }
-    public Collection<FollowEntity> findYourFollows(UserViewModel usr) {
+    public Collection<FollowEntity> findYourFollows(UserViewModel usr, String name) {
         entityManager = entityManagerFactory.createEntityManager();
         UserEntity user = entityManager.find(UserEntity.class,usr.getUserId());
         Collection<FollowEntity> follows = user.getFollow();
+        follows.removeIf(f -> !f.getFollowing().getUsername().contains(name));
         entityManager.close();
-        System.out.println(follows.size());
         return follows;
     }
     public void addFollower(FollowViewModel follow) {

@@ -17,17 +17,13 @@
     <c:if test="#{userBean.authenticated}">
         <div class="section group">
             <div class="col span_1">
-                <h:outputLabel value="Welcome #{userBean.user.username}"/><br/><br/>
-                <ui:include src="/users.xhtml"/>
-
-                chat
+                <h:outputLabel value="Welcome #{userBean.user.username}"/><br/><br/><br/><br/>
+                <span style="float: left; width: 49%;"><ui:include src="/users.xhtml"/></span>
+                <span style="float: right; width: 49%;"><ui:include src="/following.xhtml"/></span>
+                <ui:include src="/chat.xhtml"/>
             </div>
             <div class="col span_2">
-                <ui:include src="/createPost.xhtml"/>
-                <br/><br/>
-                <hr/>
-                <br/><br/>
-                <ui:include src="/yourPosts.xhtml"/>
+                <ui:include src="/userPost.xhtml"/>
             </div>
             <div class="col span_1">
                 <ui:include src="/followingPosts.xhtml"/>

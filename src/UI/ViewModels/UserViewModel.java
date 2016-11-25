@@ -1,9 +1,6 @@
 package UI.ViewModels;
 
 
-import java.util.Collection;
-import java.util.List;
-
 public class UserViewModel {
     private int userId;
     private String username;
