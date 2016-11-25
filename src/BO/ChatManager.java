@@ -17,7 +17,6 @@ public class ChatManager {
     }
 
     public void sendMessage(ChatMessageViewModel chat) {
-        System.out.println(chat.getMessage() + chat.getSender() + chat.getReceiver());
         db.addMessage(chat);
     }
 

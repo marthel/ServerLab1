@@ -4,7 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:form  rendered="#{userBean.authenticated}" id="followingSearchForm">
-        <h:outputLabel value="Search for followings:"/><br/>
+        <h:outputLabel value="Search for users you're following:"/><br/>
         <h:inputText id="f_username" value="#{followBean.searchTerm}">
             <f:ajax event="keyup" render="followings"/>
         </h:inputText><br/><br/>

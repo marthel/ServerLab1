@@ -39,9 +39,8 @@ public class UserDb {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
         Root<UserEntity> u = cq.from(UserEntity.class);
-        Predicate p1 = cb.equal(u.get("username"),this.user.getUsername());
-        Predicate p2 = cb.equal(u.get("password"),this.user.getPassword());
-        cq.where(cb.and(p1,p2));
+        Predicate p1 = cb.and(cb.equal(u.get("username"),this.user.getUsername()),cb.equal(u.get("password"),this.user.getPassword()));
+        cq.where(p1);
         UserEntity usr = entityManager.createQuery(cq).getSingleResult();
         entityManager.close();
         return  usr;
@@ -55,21 +54,17 @@ public class UserDb {
         CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
         Root<UserEntity> u = cq.from(UserEntity.class);
 
-        Predicate p1 = cb.notEqual(u.get("username"),this.user.getUsername());
-        Predicate p2 = cb.like(u.get("username"),"%"+name+"%");
-        Predicate p3 = cb.and(p1,p2);
-
+        Predicate p1 = cb.and(cb.notEqual(u.get("username"),this.user.getUsername()),cb.like(u.get("username"),"%"+name+"%"));
 
         UserEntity usr = entityManager.find(UserEntity.class,this.user.getUserId());
         Collection<FollowEntity> follows = usr.getFollow();
         if(follows.size()>0) {
             Collection<String> usrs = follows.stream().map(f -> f.getFollowing().getUsername()).collect(Collectors.toCollection(ArrayList::new));
             Expression<String> exp = u.get("username");
-            Predicate p4 = cb.not(exp.in(usrs));
-            cq.where(cb.and(p3,p4));
-
+            Predicate p2 = cb.not(exp.in(usrs));
+            cq.where(cb.and(p1,p2));
         } else {
-            cq.where(p3);
+            cq.where(p1);
         }
 
         Collection<UserEntity> users = entityManager.createQuery(cq).getResultList();

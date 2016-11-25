@@ -39,9 +39,9 @@ public class ChatBean {
     }
 
     public void sendMessage(){
-        System.out.println("hejsan!");
         this.chat.setSender(this.sender);
         chatManager.sendMessage(chat);
+        this.chat.setMessage("");
     }
 
     public List<ChatMessageViewModel> getChatMessages(){

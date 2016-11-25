@@ -4,12 +4,15 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:form  rendered="#{userBean.authenticated}" id="chatForm">
-        <h:outputLabel value="chat"/><br/>
-        <div style="padding:4px; height:480px; overflow-y: scroll; border: 1px solid; position:relative;" id="u">
+        <h:outputLabel value="Chat"/><br/>
+        <div style="padding:4px; height:450px; position:relative;" id="u">
+            <hr/>
             <h:panelGroup id="chat">
-               <ui:repeat value="#{chatBean.chatMessages}" var="message">
-                   #{message.sender.username} (#{message.sendDate}): #{message.message}<br/>
-                </ui:repeat>
+                <div style="height:333px; overflow-y: scroll;">
+                   <ui:repeat value="#{chatBean.chatMessages}" var="message">
+                       #{message.sender.username} (#{message.sendDate}): #{message.message}<br/>
+                    </ui:repeat>
+                </div>
                 <span style=" position: absolute; width: 99%; bottom:10px;">
                     <hr style="width: 100%;"/>
                     <h:inputTextarea style=" width:75%; height: 75px; display: inline-block;" id="msg" value="#{chatBean.chat.message}"/>
